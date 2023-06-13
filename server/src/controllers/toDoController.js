@@ -14,3 +14,29 @@ module.exports.saveToDo = async (req, res) => {
     res.send(data);
   });
 };
+
+module.exports.updateToDo = async (req, res) => {
+  const { _id, text } = req.body;
+
+  toDoModel
+    .findByIdAndUpdate(_id, { text })
+    .then(() => {
+      res.send("Updated successfully");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+module.exports.deleteToDo = async (req, res) => {
+  const { _id } = req.body;
+
+  toDoModel
+    .findByIdAndDelete(_id)
+    .then(() => {
+      res.send("Deleted successfully");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
